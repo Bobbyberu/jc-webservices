@@ -32,6 +32,7 @@ public interface CardController {
 
     /**
      * Add card to given lot
+     *
      * @param card
      * @return updated lot
      */

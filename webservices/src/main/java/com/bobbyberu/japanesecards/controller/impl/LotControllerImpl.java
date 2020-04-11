@@ -3,13 +3,11 @@ package com.bobbyberu.japanesecards.controller.impl;
 import com.bobbyberu.japanesecards.controller.LotController;
 import com.bobbyberu.japanesecards.dto.LotReduced;
 import com.bobbyberu.japanesecards.models.Lot;
-import com.bobbyberu.japanesecards.repository.CardRepository;
 import com.bobbyberu.japanesecards.repository.LotRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,11 +15,12 @@ import java.util.stream.StreamSupport;
 
 @RestController
 public class LotControllerImpl implements LotController {
-    @Inject
+
     private LotRepository lotRepository;
 
-    @Inject
-    private CardRepository cardRepository;
+    public LotControllerImpl(LotRepository lotRepository) {
+        this.lotRepository = lotRepository;
+    }
 
     @Override
     public Lot getLastLot() {

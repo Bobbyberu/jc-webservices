@@ -5,12 +5,16 @@ import com.bobbyberu.japanesecards.repository.LotRepository;
 import com.bobbyberu.japanesecards.service.LotService;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
-
 @Service
 public class LotServiceImpl implements LotService {
-    @Inject
+
     private LotRepository lotRepository;
+
+    private Lot lot;
+
+    public LotServiceImpl(LotRepository lotRepository) {
+        this.lotRepository = lotRepository;
+    }
 
     @Override
     public Lot getLatestLot() {

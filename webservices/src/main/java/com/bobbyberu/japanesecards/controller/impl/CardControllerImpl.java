@@ -9,18 +9,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class CardControllerImpl implements CardController {
-    @Inject
+
     private CardRepository cardRepository;
 
-    @Inject
     private LotRepository lotRepository;
+
+    public CardControllerImpl(CardRepository cardRepository, LotRepository lotRepository) {
+        this.cardRepository = cardRepository;
+        this.lotRepository = lotRepository;
+    }
 
     @Override
     public Card getById(int id) {
@@ -50,7 +53,7 @@ public class CardControllerImpl implements CardController {
     public Lot addToLot(int id, Card card) {
         Lot lot;
         Optional<Lot> queryResult = lotRepository.findById(id);
-        if(queryResult.isPresent()) {
+        if (queryResult.isPresent()) {
             lot = queryResult.get();
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No lot was found");
