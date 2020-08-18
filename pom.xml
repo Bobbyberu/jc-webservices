@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <!-- add versions for all other dependencies -->
     </properties>
 
     <profiles>
@@ -73,7 +74,12 @@
             <version>42.2.12</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

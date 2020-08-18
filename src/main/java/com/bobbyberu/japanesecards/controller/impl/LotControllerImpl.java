@@ -4,6 +4,7 @@ import com.bobbyberu.japanesecards.controller.LotController;
 import com.bobbyberu.japanesecards.dto.LotReduced;
 import com.bobbyberu.japanesecards.models.Lot;
 import com.bobbyberu.japanesecards.repository.LotRepository;
+import com.bobbyberu.japanesecards.service.LotService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,13 +19,16 @@ public class LotControllerImpl implements LotController {
 
     private LotRepository lotRepository;
 
-    public LotControllerImpl(LotRepository lotRepository) {
+    private LotService lotService;
+
+    public LotControllerImpl(LotRepository lotRepository, LotService lotService) {
         this.lotRepository = lotRepository;
+        this.lotService = lotService;
     }
 
     @Override
     public Lot getLastLot() {
-        return lotRepository.findFirstByOrderByCreationDateDesc();
+        return lotService.getLatestLot();
     }
 
     @Override
